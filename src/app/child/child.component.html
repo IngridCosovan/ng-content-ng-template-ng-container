@@ -1,0 +1,30 @@
+<div class="title">Child component</div>
+<ng-content select="[testTitle]"></ng-content>
+<div>Acesta este inca un text</div>
+<ng-content select=".desc"></ng-content>
+
+<!-- folosim ng-container sa grupam elemente care nu interfereaza cu
+cu stiluri sau layout deoarece Angular nu pune asta in DOM 
+In acest caz putea sa fie in loc de ng-container un span/div sau altceva. Daca in proiect se stilizeaza acel span/div atunci va si stilizat si el
+de aceea folosim ng-container-->
+<hr />
+<h1>Testare ng-container</h1>
+<div *ngFor="let number of numbers">
+  <ng-container *ngIf="number % 2 === 0">{{ number }}</ng-container>
+</div>
+
+<!-- ng-template este un template elemnent pe care Angular il foloseste impreuna cu directive structurale (*ngIf, *ngFor)  
+Cand folosim ng-template nu vom piutea folosi *ngIf ci [ngIf]
+Cand folosim * informam Angular ca trebuie sa trasforme acel element intr-un ng-template.
+Daca folosim parantezele patrate -->
+<hr />
+<h1>Testare ng-template</h1>
+<ng-template [ngIf]="true"
+  >Acesta este continutul inauntrul unui ng-template</ng-template
+>
+<hr />
+<ng-template [ngIf]="true">This is a content inside a ng-template</ng-template>
+<div *ngIf="true; else elseBlock">Condition is true</div>
+<ng-template #elseBlock>
+  <div>Condition is false</div>
+</ng-template>
